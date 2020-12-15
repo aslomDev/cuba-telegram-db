@@ -1,0 +1,1 @@
+drop table if exists TELEGRAM_TG_USER__U19991 cascade ;
