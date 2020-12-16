@@ -8,6 +8,7 @@ import org.slf4j.Logger;
 import org.springframework.stereotype.Component;
 import org.telegram.telegrambots.bots.TelegramLongPollingBot;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
+import org.telegram.telegrambots.meta.api.objects.Message;
 import org.telegram.telegrambots.meta.api.objects.Update;
 import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 
@@ -26,22 +27,34 @@ public class MyAmazingBot extends TelegramLongPollingBot {
     @Override
     public void onUpdateReceived(Update update) {
         // We check if the update has a message and the message has text
-        if (update.hasMessage() && update.getMessage().hasText()) {
-            SendMessage message = new SendMessage(); // Create a SendMessage object with mandatory fields
-            message.setChatId(update.getMessage().getChatId().toString());
-            message.setText(update.getMessage().getText());
-            long id = update.getMessage().getChatId();
-            try {
+        if (update.hasMessage() && update.getMessage().getText().equals("/start")) {
+//            SendMessage message = new SendMessage(); // Create a SendMessage object with mandatory fields
+//            message.setChatId(update.getMessage().getChatId().toString());
+//            message.setText(update.getMessage().getText());
+            String id = update.getMessage().getChatId().toString();
+//            try {
                 log.info("Какой то текст");
-
+//                execute(message); // Call method to send the message
                 authentication.begin();
-                tgUserService.createUser(id);
+                tgUserService.createUser(id, update.getMessage().getFrom().getFirstName(), update.getMessage().getFrom().getLastName(), update.getMessage().getFrom().getUserName());
                 authentication.end();
-                execute(message); // Call method to send the message
-            } catch (TelegramApiException e) {
-                log.error("Error", e);
-            }
+//            } catch (TelegramApiException e) {
+//                log.error("Error", e);
+//            }
         }
+
+
+
+    }
+
+    public void sendMsg(SendMessage message) {
+
+        try {
+            execute(message);
+        } catch (TelegramApiException e) {
+            e.printStackTrace();
+        }
+
     }
 
     @Override

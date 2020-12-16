@@ -2,5 +2,6 @@
 <menu-config xmlns="http://schemas.haulmont.com/cuba/menu.xsd">
     <menu id="application-telegram" insertBefore="administration" caption="mainMsg://menu_config.application-telegram">
         <item screen="telegram_TgUser.browse" caption="mainMsg://menu_config.telegram_TgUser.browse"/>
+        <item screen="telegram_Message.browse" caption="mainMsg://menu_config.telegram_Message.browse"/>
     </menu>
 </menu-config>

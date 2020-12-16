@@ -1,4 +1,4 @@
-create table TELEGRAM_TG_USER (
+create table TELEGRAM_MESSAGE (
     ID uuid,
     VERSION integer not null,
     CREATE_TS timestamp,
@@ -8,10 +8,8 @@ create table TELEGRAM_TG_USER (
     DELETE_TS timestamp,
     DELETED_BY varchar(50),
     --
-    USER_NAME varchar(255),
-    FIRST_NAME varchar(255),
-    LAST_NAME varchar(255),
-    USER_ID bigint,
+    MSG varchar(255),
+    USER_MSG_ID uuid not null,
     --
     primary key (ID)
 );

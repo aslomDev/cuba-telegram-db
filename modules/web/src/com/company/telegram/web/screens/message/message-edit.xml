@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<window xmlns="http://schemas.haulmont.com/cuba/screen/window.xsd"
+        caption="msg://messageEdit.caption"
+        focusComponent="form"
+        messagesPack="com.company.telegram.web.screens.message">
+    <data>
+        <instance id="messageDc"
+                  class="com.company.telegram.entity.Message">
+            <view extends="_local">
+                <property name="user" view="_minimal"/>
+            </view>
+            <loader/>
+        </instance>
+        <collection id="userId" class="com.company.telegram.entity.TgUser" view="_minimal">
+            <loader id="subUser">
+                <query>
+                    <![CDATA[select t from telegram_TgUser t]]>
+                </query>
+            </loader>
+        </collection>
+        <collection id="tgUsersDc"
+                    class="com.company.telegram.entity.TgUser">
+            <view extends="_local"/>
+            <loader id="tgUsersDl">
+                <query>
+                    <![CDATA[select e from telegram_TgUser e]]>
+                </query>
+            </loader>
+        </collection>
+<!--        <collection id="Id" class="com.company.telegram.entity.TgUser" view="_minimal">-->
+<!--            <loader id="IdUser">-->
+<!--                <query>-->
+<!--                    <![CDATA[select t from telegram_TgUser t where t.userId]]>-->
+<!--                </query>-->
+<!--            </loader>-->
+<!--        </collection>-->
+    </data>
+    <dialogMode height="600"
+                width="800"/>
+    <layout expand="editActions" spacing="true">
+<!--        <groupTable id="tgUsersTable"-->
+<!--                    width="100%"-->
+<!--                    dataContainer="tgUsersDc">-->
+<!--            <columns>-->
+<!--                <column id="userId" />-->
+<!--            </columns>-->
+<!--        </groupTable>-->
+        <flowBox spacing="true" margin="true">
+        <form id="form" dataContainer="messageDc">
+            <column width="350px">
+                <lookupField id="userField" dataContainer="messageDc" optionsContainer="userId" property="user" />
+            </column>
+        </form>
+            <form id="form2" dataContainer="messageDc">
+                <column width="350px">
+<!--                    <textField id="Id" ></textField>-->
+                        <sourceCodeEditor id="msgField" height="220px" property="msg"  handleTabKey="true" highlightActiveLine="true" mode="JavaScript" printMargin="false"
+                                      showGutter="true"/>
+                </column>
+            </form>
+        </flowBox>
+        <hbox id="editActions" spacing="true">
+            <button action="windowCommitAndClose"/>
+            <button action="windowClose"/>
+        </hbox>
+    </layout>
+</window>

@@ -1,11 +1,13 @@
 package com.company.telegram.entity;
 
+import com.haulmont.chile.core.annotations.NamePattern;
 import com.haulmont.cuba.core.entity.StandardEntity;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 
+@NamePattern("%s|firstName")
 @Table(name = "TELEGRAM_TG_USER")
 @Entity(name = "telegram_TgUser")
 public class TgUser extends StandardEntity {
@@ -20,16 +22,16 @@ public class TgUser extends StandardEntity {
     private String lastName;
 
     @Column(name = "USER_ID")
-    private Long userId;
+    private String userId;
 
-    public TgUser(Long userId) {
+    public TgUser(String userId) {
         this.userId = userId;
     }
 
     public TgUser() {
     }
 
-    public TgUser(String userName, String firstName, String lastName, Long userId) {
+    public TgUser(String userName, String firstName, String lastName, String userId) {
         this.userName = userName;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -64,11 +66,11 @@ public class TgUser extends StandardEntity {
         this.lastName = lastName;
     }
 
-    public Long getUserId() {
+    public String getUserId() {
         return userId;
     }
 
-    public void setUserId(Long userId) {
+    public void setUserId(String userId) {
         this.userId = userId;
     }
 }

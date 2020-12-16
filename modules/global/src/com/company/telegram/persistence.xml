@@ -3,5 +3,6 @@
     <persistence-unit name="telegram" transaction-type="RESOURCE_LOCAL">
 
         <class>com.company.telegram.entity.TgUser</class>
+        <class>com.company.telegram.entity.Message</class>
     </persistence-unit>
 </persistence>
